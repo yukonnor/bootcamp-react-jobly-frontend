@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import JoblyApi from "../api.js";
 import useLocalStorage from "./hooks/useLocalStorage";
 import "./App.css";
@@ -27,24 +27,14 @@ function App() {
     useEffect(() => {
         async function getAppliedJobs(username) {
             if (user.username) {
-                console.log("In getAppliedJobs...username found.");
                 const response = await getUser(user.username, user.token);
                 const appliedJobs = response.applications;
                 setAppliedJobs(appliedJobs);
             }
             setIsLoading(false);
-            console.log("App re-rendered from scratch!!!");
         }
         getAppliedJobs(user.username);
     }, []);
-
-    useEffect(() => {
-        console.log("user state updated:", user);
-    }, [user]);
-
-    useEffect(() => {
-        console.log("appliedJobs state updated:", appliedJobs);
-    }, [appliedJobs]);
 
     /* authUser to authenticate username + password from Login form*/
 
@@ -140,6 +130,7 @@ function App() {
                                     />
                                 }
                             />
+                            <Route path="*" element={<Navigate to="/" />} />
                         </Routes>
                     </AppliedJobsContext.Provider>
                 </main>

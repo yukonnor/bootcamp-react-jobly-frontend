@@ -27,8 +27,6 @@ class JoblyApi {
             const response = await axios({ url, method, data, params, headers });
             return response.data;
         } catch (err) {
-            console.log("Hello API Error!", err.response);
-            // console.error("API Error:", err.response);
             let message = err.response.data.error.message;
             return err.response.data.error;
             // throw Array.isArray(message) ? message : [message];
@@ -48,7 +46,6 @@ class JoblyApi {
      *  returns: {token}) */
 
     static async authenticate(username, password) {
-        console.log("in API.authenticate()...");
         let res = await this.request("auth/token", { username, password }, "post");
         return res;
     }
@@ -58,7 +55,6 @@ class JoblyApi {
      *  returns: {token} */
 
     static async register(userObj) {
-        console.log("in API.register()...");
         let res = await this.request("auth/register", userObj, "post");
         return res;
     }
@@ -68,10 +64,8 @@ class JoblyApi {
      *  returns: { applications, username, firstName, lastName, email, isAdmin } */
 
     static async getUser(username, token) {
-        console.log("in API.getUser()...");
         this.token = token;
         let res = await this.request(`users/${username}`, {}, "get");
-        // console.log("API.getUser() res:", res);
         return res.user;
     }
 
@@ -80,7 +74,6 @@ class JoblyApi {
      *  returns: { username, firstName, lastName, email, isAdmin } */
 
     static async updateUser(username, token, dataToUpdate) {
-        console.log("in API.updateUser()...");
         this.token = token;
         let res = await this.request(`users/${username}`, dataToUpdate, "patch");
         return res;
@@ -91,7 +84,6 @@ class JoblyApi {
      *  returns: {"applied": jobId}*/
 
     static async applyToJob(username, token, jobId) {
-        console.log("in API.applyToJob()...");
         this.token = token;
         let res = await this.request(`users/${username}/jobs/${jobId}`, {}, "post");
         return res;
