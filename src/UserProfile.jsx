@@ -41,14 +41,12 @@ const UserProfile = ({ user, getUser, updateUser }) => {
         const dataToUpdate = { ...formData };
         delete dataToUpdate.username;
 
-        console.log("handleSubmit args: ", user.username, user.token, dataToUpdate);
         const response = await updateUser(user.username, user.token, dataToUpdate);
 
         // based on response, navigate home or show error
         if (response && response.username) {
             setSubmitMsg({ alertType: "success", message: ["Profile updated!"] });
         } else {
-            console.log("response: ", response);
             setSubmitMsg({ alertType: "danger", message: response.message });
         }
     };

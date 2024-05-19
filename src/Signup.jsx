@@ -23,26 +23,13 @@ const Signup = ({ user, registerUser }) => {
 
         const response = await registerUser(userObj);
 
-        console.log("handleSubmit register response: ", response);
-
         // based on response, navigate home or show error
         if (response.token) {
             navigate("/");
         } else {
-            console.log("Bad response!!!", response.message);
-            console.log("error state before:", error);
             setError(response.message);
-            console.log("error state after:", error);
         }
     }
-
-    useEffect(() => {
-        console.log("error state:", error);
-    }, [error]);
-
-    useEffect(() => {
-        console.log("component re-rendered from scratch");
-    }, []);
 
     /** Update local state w/ current state of input element */
 
