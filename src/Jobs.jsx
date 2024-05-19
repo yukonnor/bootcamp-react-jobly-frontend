@@ -32,7 +32,10 @@ function Jobs({ user, applyToJob }) {
 
         const response = await JoblyApi.request("jobs", searchParams);
 
-        setJobs(response.jobs);
+        // if jobs returned, set jobs
+        response.jobs && setJobs(response.jobs);
+
+        // clear search form
         setFormData(INITIAL_STATE);
     };
 

@@ -32,7 +32,10 @@ function Companies({ user }) {
 
         const response = await JoblyApi.request("companies", searchParams);
 
-        setCompanies(response.companies);
+        // if companies returned, set companies
+        response.companies && setCompanies(response.companies);
+
+        // clear search form
         setFormData(INITIAL_STATE);
     };
 

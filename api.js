@@ -27,6 +27,8 @@ class JoblyApi {
             const response = await axios({ url, method, data, params, headers });
             return response.data;
         } catch (err) {
+            console.log("API request retured error or failed...");
+            console.log(err);
             let message = err.response.data.error.message;
             return err.response.data.error;
             // throw Array.isArray(message) ? message : [message];

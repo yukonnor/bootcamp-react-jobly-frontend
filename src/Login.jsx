@@ -23,8 +23,6 @@ const Login = ({ user, authUser }) => {
 
         const response = await authUser(username, password);
 
-        console.log("handleSubmit login response: ", response);
-
         // based on response, navigate home or show error
         if (response.token) {
             navigate("/");
